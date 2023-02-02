@@ -1,0 +1,33 @@
+//leetcode qstn no 67
+//****************************************
+class Solution 
+{
+public:
+    string addBinary(string a, string b) 
+    {
+        int alen=a.size();
+        int blen=b.size();
+        int i=0,carry=0;
+        string ans ="";//sting to append the characters
+
+        while(i<alen || i<blen || carry!=0)//runs until one of the conditions is false
+        {
+            int x=0;
+            if(i<alen && a[alen-i-1]=='1')//if the last element is 1 of the a sting  
+            {
+                x=1;
+            }
+            int y=0;
+            if(i<blen && b[blen-i-1]=='1')//if the last element of b sting is 1
+            {
+                y=1;
+            }
+           ans=to_string((x+y+carry)%2)+ans;// value obtained by (x+y+carry)%2
+           //as ans is a sting type so the resulatant should be string od to_sting is used
+           carry=(x+y+carry)/2;////value of carry
+
+           i++;
+        }
+        return ans;
+    }
+};
