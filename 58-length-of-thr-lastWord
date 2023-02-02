@@ -1,0 +1,21 @@
+// leetcode qstn no 58
+//*********************************
+class Solution {
+public:
+    int lengthOfLastWord(string s) 
+    {
+        int i=s.size()-1;
+        int len=0;
+        while(i>=0 && s[i]==' ')//it decrements the size from the last and stops when a character is encountered
+        {
+            i--;
+        }   
+        while(i>=0 && s[i]!=' ')//it decrements the size and increments the len until a space is encountered
+        {
+            i--;
+            len++;
+        }
+      return len;//the lenghth of the last word is returned 
+        
+    }
+};
