@@ -1,0 +1,35 @@
+//leet code qstn no 205 isomorphic strings
+//***********************************************
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) 
+    {
+        if(s.size()!=t.size())
+        {
+            return false;
+        }
+        int n=s.size();
+        map<char,char> mp;
+        set<char> x;
+
+        for(int i=0;i<n;i++)
+        {
+            if(mp.count(s[i])==0 && x.count(t[i])==0)//both are not present in map and set thn insert both
+            {
+                mp[s[i]]=t[i];//insert in map
+                x.insert(t[i]);//insert in set
+            }
+            else if(mp.count(s[i])==0 && x.count(t[i])==1)//check if s[i] not present in map but t[i] is present in set for some other element in map
+            {
+                return false;
+            }
+            else if(mp[s[i]]!=t[i])//when s[i]->t[i] do not match
+            {
+                return false;
+            }
+        }
+        return true;
+
+     
+    }
+};
