@@ -1,0 +1,49 @@
+//leetcode qstn no 290 word pattern 
+//***********************************************
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) 
+    {
+        int n = pattern.size();
+        int m = s.size();
+        vector<string> v;
+         string str;
+        for(int i=0;i<m;i++)
+        {
+            if(s[i]!=' ')
+            {
+                str.push_back(s[i]);
+            }
+            else
+            {
+                v.push_back(str);
+                str="";
+            }
+        }
+        v.push_back(str);
+
+        if(v.size()!=n)//checks if the no of words in s ia equal to the no of characters in pattern
+        return false;
+
+        map<char,string> map;
+        set<string> x;
+        for(int i=0;i<n;i++)
+        {
+            if(map.count(pattern[i])==0 && x.count(v[i])==0)//checks is the chars and strings are present in the map and set if not thn isert
+            {
+                map[pattern[i]]=v[i];//insert the char in map 
+                x.insert(v[i]);//insert the string in set
+            }
+            else
+            {
+               if(map[pattern[i]]!=v[i])
+               {
+                   return false;
+               }                
+            }
+        }
+    return true;
+     
+    }
+};
+//*******************************************
