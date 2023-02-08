@@ -1,0 +1,24 @@
+//leetcode qstn no 344 reverse string 
+//*******************************************************
+class Solution {
+public:
+    void reverseString(vector<char>& s) 
+    {
+        //reverse. astring without extra space 
+        int n=s.size();
+        char temp;
+        int k=0;
+        int m=n-1;
+        for(int i=0;i<n/2;i++)//replaces the corresponding first and last occurances of string 
+        {
+             temp=s[k];
+             s[k]=s[m];
+             s[m]=temp;
+             k++;
+             m--;
+        }
+
+        
+    }
+};
+//*********************************************************
