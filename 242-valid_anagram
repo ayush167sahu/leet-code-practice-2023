@@ -1,0 +1,40 @@
+//leetcode qstn mo 242
+//************************************
+class Solution {
+public:
+    bool isAnagram(string s, string t) 
+    {
+        if(s.size()!=t.size())//if both the string are of unequal size
+        {
+              return false;
+        }
+        int n=s.size();
+        int count_s[26]={0};
+        int count_t[26]={0};
+        int s_index=0;
+        int t_index=0;
+
+        for(char ch : s)//created a freq arrary to store the freq of s sting chars ascii value as index i.e count_s[ascii]=no of occurance 
+        {
+            s_index=ch-'a';
+            count_s[s_index]++;;
+        }
+
+        for(char ch:t)//created a freq arrary to store the freq of t string chars ascii value as index i.e count_s[ascii]=no of occurance 
+        {
+            t_index=ch -'a';
+            count_t[t_index]++;
+        }
+        for(int i=0;i<26;i++)
+        {
+            if(count_s[i]!=count_t[i])//check if both characters have all strings and same no of occurances
+            {
+                return false;//if not return false;
+            }
+        }
+        return true;//else return true
+
+        
+    }
+};
+//*************************
