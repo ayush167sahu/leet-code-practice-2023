@@ -1,0 +1,28 @@
+leetcode qstn no 234
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) 
+    {
+        if(head->next==NULL)
+        return true;
+        ListNode *temp =head;
+        vector<int>vec;
+        while(temp!=NULL)
+        {
+            vec.push_back(temp->val);
+            temp=temp->next;
+        }
+        int s=0;
+        int l = vec.size()-1;
+        while(s<l)
+        {
+            if(vec[s]!=vec[l])
+              return false;
+            s++;
+            l--;
+        }
+        return true;
+
+        
+    }
+};
