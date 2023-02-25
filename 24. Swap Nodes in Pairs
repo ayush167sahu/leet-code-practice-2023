@@ -1,0 +1,30 @@
+24. Swap Nodes in Pairs
+//*************************
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) 
+    {
+        //creating a dummy node to keep ht e track of the head
+        ListNode* dummy = new ListNode();
+        dummy->next = head;
+
+        ListNode* point = dummy;
+
+        while(point->next!=NULL && point->next->next!=NULL)
+        {
+            ListNode *swap1 = point->next;
+            ListNode *swap2 = point->next->next;
+
+            //swapping the values;
+            swap1->next=swap2->next;
+            swap2->next=swap1;
+
+            //preparing for next node;
+            point ->next=swap2;
+            point =swap1;
+
+        }
+        return dummy->next;
+        
+    }
+};
