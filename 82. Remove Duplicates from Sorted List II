@@ -1,0 +1,30 @@
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) 
+    {
+        if(head==NULL)
+          return head;
+        
+        ListNode *pseudo = new ListNode(0);
+        pseudo->next = head;
+        ListNode* itr = pseudo;
+        while(itr->next!=NULL && itr->next->next!=NULL)
+        {
+            if(itr->next->val == itr->next->next->val)
+            {
+                int variable= itr->next->val;//keeping the variable for the next comparision
+                while(itr->next!=NULL && itr->next->val==variable)
+                {
+                    itr->next=itr->next->next;
+                }
+            }
+            else
+            {
+                itr=itr->next;
+            }
+        }
+        return pseudo->next;
+        
+    }
+};
+Console
