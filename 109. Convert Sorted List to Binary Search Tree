@@ -1,0 +1,29 @@
+109. Convert Sorted List to Binary Search Tree
+
+//in this approach i have converted the linkedlist to a arrar/vector and converted a sorted array to a binary tree
+class Solution {
+public:
+    TreeNode* sortedListToBST(ListNode* head) 
+    {
+       vector<int> v;
+       while(head)
+       {
+           v.push_back(head->val);//pushing the linkedlist elements to the vector
+           head=head->next;
+       }
+
+       return func(v,0,v.size()-1);
+        
+    }
+    TreeNode * func(vector<int> v,int l,int r)
+    { 
+        if(l>r)//edge case
+        return NULL;
+        int mid = (l+r)/2;//taking the mid point of array as the node
+        TreeNode * node = new TreeNode(v[mid]);
+        node->left = func(v,l,mid-1);//calling function on left part
+        node->right = func(v,mid+1,r);//calling function on the right part
+
+        return node;
+    }
+};
