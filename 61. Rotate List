@@ -1,0 +1,29 @@
+61. Rotate List
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) 
+    {
+        if(head==NULL)//edge case if head is empty return NULL
+        return head;
+
+        int len=1;
+        ListNode * tail = head;
+        ListNode * nhead = head;
+
+        while(tail->next!=NULL)
+        {
+            len++;//to calculate the length of the head
+            tail=tail->next;
+        }
+        tail->next=head;//the last node is connected to the head
+        k=k%len;//it id =s done to handle for eg a list pf size 3 is rotated 4 times means rotated 1 tims
+        for(int i=0;i<len-k;i++)
+        {
+            tail=tail->next;
+        }
+        nhead=tail->next;//the kth node is made the new head to return
+        tail->next=NULL;//the  node before the last kth node is made null
+
+      return nhead;       // the new head is returned
+    }
+};
