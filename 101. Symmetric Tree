@@ -1,0 +1,19 @@
+101. Symmetric Tree
+class Solution {
+public:
+    bool isTreesymmetric(TreeNode* p,TreeNode* q)
+    {
+         if(p==NULL || q==NULL)
+          return p==q;
+
+        return ((p->val == q->val) && isTreesymmetric(p->left,q->right) && isTreesymmetric(p->right,q->left));
+    }
+    bool isSymmetric(TreeNode* root) 
+    {
+        //node left right ->
+
+        return isTreesymmetric(root->left,root->right);
+        
+        
+    }
+};
