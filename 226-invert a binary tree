@@ -1,0 +1,56 @@
+leetcode qstn no 226 invert a binary tree
+//the following qsstn is done in two methods one in queue and other recursive method
+//recursive method
+//********************************************
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) 
+    {
+     //edge case or base case
+      if(root==NULL)
+         return root;
+
+    //using the recursive solution we iterate to the last of right and left    
+    TreeNode* left = invertTree(root->left);
+    TreeNode* right = invertTree(root->right);
+
+    //we swap the right and left nodes
+    root->left=right;
+    root->right = left;
+
+    return root;
+
+        
+    }
+};
+//**************************************************
+//bfs method using queue
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) 
+    {
+       if(root==NULL)
+         return root;
+       queue<TreeNode*> q;
+       q.push(root);
+
+       while(!q.empty())
+       {
+           TreeNode* curr = q.front();
+           q.pop();
+           TreeNode * temp;
+           temp = curr->left;
+           curr->left=curr->right;
+           curr->right=temp;
+
+           if(curr->left!=NULL)
+            q.push(curr->left);
+        
+           if(curr->right!=NULL)
+           q.push(curr->right);
+       }
+       return root;
+        
+    }
+};
+//*******************************************
