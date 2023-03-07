@@ -1,0 +1,24 @@
+100.same tree
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) 
+    {   //if thr root is empty thn true
+        if(p==NULL && q==NULL)
+         return true;
+        //if one right node misssing thn false
+        if(p==NULL && q!=NULL)
+           return false;
+        //if one left node missing thn false
+        if(q==NULL && p!=NULL)
+           return false;
+
+        //calling the same above on left subtree
+        bool left = isSameTree(p->left,q->left);
+        //calling the same above conditions on right sbstree
+        bool right = isSameTree(p->right,q->right);
+        //checking the values from both the trees simultaneously
+        bool val = (p->val == q->val);
+        return (val && left && right);
+        
+    }
+};
