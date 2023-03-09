@@ -1,0 +1,44 @@
+437. Path Sum III
+Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.
+
+The path does not need to start or end at the root or a leaf, but it must go downwards (i.e., traveling only from parent nodes to child nodes).
+//ans
+class Solution {
+public:
+    void solve(TreeNode* root, int k,int &count,vector<int> path )
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        //pushing the ciurrent root value in vector
+        path.push_back(root->val);
+        //left call
+        solve(root->left,k,count,path);
+        //right call
+        solve(root->right,k,count,path);
+        long long int sum = 0;
+        int n = path.size();
+        //the elements are to added from back and popped simultaneously
+        for(int i=n-1;i>=0;i--)
+        {
+            sum+=path[i];
+            if(sum==k)
+            {
+                count++;
+            }
+        }
+        //popping the ekements after going back
+        path.pop_back();
+    }
+    int pathSum(TreeNode* root, int targetSum) 
+    {
+        //the approach is to store the elments in a vector then add the elements of the 
+        //vector from back if it is equal to the sum thn pop the elments
+        vector<int> path;
+        //to keep the count of the paths
+        int count=0;
+        solve(root,targetSum,count,path);
+        return count;
+    }
+};
