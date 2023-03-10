@@ -1,0 +1,29 @@
+114. Flatten Binary Tree to Linked List
+class Solution {
+public:
+    void flatten(TreeNode* root) 
+    {
+        TreeNode* current = root;
+        //till the current node has not reached the end
+        while(current!=NULL)
+        {
+            //if the left node exits thn only we can link the inorder predecessors to the right of the root
+            if(current->left!=NULL)
+            {
+                //we have to keep a prev node to keep the ledt node and move tp the right most part 
+                TreeNode* prev = current->left;
+                while(prev->right!=NULL)
+                  prev=prev->right;//till we reach the rightmost leaf node of leftsubtree
+                
+                //thn we have to link the rightmost node to the right of the root;
+                prev->right = current->right;//adding the connection
+                current->right= current->left;//estblising the connectiom
+                current->left = NULL;//Making the left part. ull for linkedlist view
+
+            }
+            current = current->right;//moving the current to the nxt right position;
+
+        } 
+        
+    }
+};
