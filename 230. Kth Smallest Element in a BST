@@ -1,0 +1,32 @@
+230.kth smallest element in binary search tree]
+the logic is that the inorder traversal of the BST is sorted in ascending order .so that the kth element from the begining of the preorder traversal gives 
+the kth smallest element of the BST
+class Solution {
+public:
+    int solve(TreeNode* root,int &i,int k )
+    {
+        if(root==NULL)
+          return -1;
+        //the inorder traversal of the bst is sorted in ascending order ans the kth element foem start is the ans
+        //inorder
+
+        //LEFT
+        int left = solve(root->left,i,k);
+        if(left!=-1)
+         return left;
+        //ROOT
+        i++;
+        if(i==k)
+          return root->val;
+        //RIGTH
+        return solve(root->right,i,k);
+
+
+    }
+    int kthSmallest(TreeNode* root, int k) 
+    {
+       int i=0;
+       return solve(root,i,k);   
+    }
+};
+//end
