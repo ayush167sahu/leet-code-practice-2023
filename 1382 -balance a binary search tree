@@ -1,0 +1,39 @@
+1382-balance a binary search tree
+class Solution {
+public:
+    void inorder(TreeNode* root, vector<int> &ans)
+    {
+        if(root==NULL)
+          return;
+        //we are going for inorder traversal so (LEFT ROOT RIGHT)
+         inorder(root->left,ans);
+         ans.push_back(root->val);
+         inorder(root->right,ans);
+    }
+   TreeNode* convert(int start,int end,vector<int> &ans)
+    {
+        //as the start is increased and end is decreased so base case is
+        if(start>end)
+          return NULL;
+        int mid = (start+end)/2;
+        //male the mid element as rht root;
+        TreeNode* root = new TreeNode(ans[mid]);
+        //thn go for left subtree
+        root->left = convert(start,mid-1,ans);
+        //thn go for right subtree
+        root->right = convert(mid+1,end,ans);
+
+        return root;
+    }
+    TreeNode* balanceBST(TreeNode* root) 
+    {
+        //approach
+        //the inorder traversal of binary tree is alaways sorted so we will store it in a vector
+        //the qstn now converts convery inorder traversal to a balanced BST 
+        vector<int> ans;
+        inorder(root,ans);
+        int size = ans.size();
+        return convert(0,size-1,ans);
+        
+    }
+};
