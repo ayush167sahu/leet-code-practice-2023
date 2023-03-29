@@ -1,0 +1,73 @@
+632. Smallest Range Covering Elements from K Lists
+//approch the first k elements of the k lists are pushed into the minHeap
+//the we keep the track of max ans minimum of the lisst;
+//as the maximum of the list cannot be decreased we decrease the minimum of the k elements
+//while decreasing we check the minimum and maximum and check it with the previos difference of the ranges
+class Solution {
+public:
+    struct node
+    {
+        int data;
+        int i;
+        int j;
+        node(int data,int row,int col)
+        {
+            this->data = data;
+            i=row;
+            j=col;
+        }
+
+    };
+    struct compare
+    {
+       bool operator()(node *a,node *b)
+       {
+           return a->data>b->data;
+       }
+    };
+    vector<int> smallestRange(vector<vector<int>>& nums) 
+    {
+        int mini = INT_MAX;
+        int maxi = INT_MIN;
+
+        priority_queue<node*,vector<node*>,compare> minHeap;
+        int k = nums.size();
+        //pushing the front elements of the list into the heap
+        for(int i=0;i<k;i++)
+        {
+            node* temp = new node(nums[i][0],i,0);
+            maxi = max(maxi,nums[i][0]);
+            mini = min(mini,nums[i][0]);
+            minHeap.push(temp);
+        } 
+
+        int end = maxi;
+        int start = mini;
+
+        while(minHeap.size()>0)
+        {
+            node *top = minHeap.top();
+            minHeap.pop();
+
+            mini = top->data;
+
+            if(maxi-mini<end-start)
+            {
+                start = mini;
+                end = maxi;
+            }
+            if(top->j+1<nums[top->i].size())
+            {
+                node *temp = new node(nums[top->i][top->j+1],top->i,top->j+1);
+                maxi = max(maxi,nums[top->i][top->j+1]);
+                minHeap.push(temp);
+            }
+            else
+            {
+                break;
+            }
+        }
+        return {start,end};
+
+    }
+};
