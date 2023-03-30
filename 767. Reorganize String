@@ -1,0 +1,54 @@
+767. Reorganize String
+class Solution {
+public:
+    string reorganizeString(string s) 
+    {
+        unordered_map<char,int> mp;
+        priority_queue<pair<int,char>> pq;
+
+        string output = "";
+        //inserting into the map to keep the frequency of the char
+        for(auto i :s)
+        {
+            mp[i]++;
+        }
+
+        //insert the pair into the priority queue
+        for(auto i:mp)
+        {
+            pq.push({i.second,i.first});
+        }
+
+        while(pq.size()>1)
+        {
+            auto top1 = pq.top();
+            pq.pop();
+            auto top2 = pq.top();
+            pq.pop();
+
+            output+=top1.second;
+            output+=top2.second;
+
+            if(--top1.first>0)
+            {
+                pq.push(top1);
+            }
+            if(--top2.first>0)
+            {
+               pq.push(top2);
+            }
+        }
+        //if still the pq is not empty means if has 1 or more elemenrts left
+        if(pq.size()!=0)
+        {
+            if(pq.top().first==1)
+            {               
+                 output+=pq.top().second;
+            }
+            else 
+             return "";
+        }
+        return output;
+        
+    }
+};
