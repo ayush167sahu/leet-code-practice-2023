@@ -1,0 +1,82 @@
+the given has asked to print the output in the folowing manner
+Output: [[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+class Solution {
+public:
+   
+    bool isSafe(int row ,int col,vector<string> board,int n)
+    {
+        int x = row;
+        int y = col;
+        //we have to check in 3 directions
+        //col;
+        while(y>=0)
+        {
+            if(board[x][y]=='Q')
+            {
+                return false;
+            }
+            y--;
+        }
+        x = row;
+        y = col;
+        //upper diagonal
+        while(x>=0 && y>=0)
+        {
+            if(board[x][y]=='Q')
+            {
+                return false;
+            }
+            x--;
+            y--;
+        }
+        x= row;
+        y = col;
+        //lower diaginal
+        while(x<n && y>=0)
+        {
+            if(board[x][y]=='Q')
+            {
+                return false;
+            }
+            x++;
+            y--;
+        }
+        return true;
+    }
+    void solve(int col ,vector<string> &board,vector<vector<string>> &ans,int n)
+    {
+        //base case
+        if(col==n)
+        {
+          ans.push_back(board);
+          return;
+        }
+
+        //else place the queen if safe
+        for(int row=0;row<n;row++)
+        {
+            if(isSafe(row,col,board,n))
+            {
+                board[row][col] = 'Q';
+                solve(col+1,board,ans,n);
+                board[row][col] = '.';
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) 
+    {
+       vector<vector<string>>  ans;
+        vector<string> board(n);
+        string s(n,'.');
+        //the following problem is implemeneted through backtracking
+        //which means before going back from a configuration we have to mark the place as unvisited
+        for(int i=0;i<n;i++)
+        {
+            board[i]=s;
+        }
+
+        solve(0,board,ans,n);
+        
+        return ans;
+    }
+};
