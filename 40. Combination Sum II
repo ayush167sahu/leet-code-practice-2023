@@ -1,0 +1,38 @@
+40. Combination Sum II 40. Combination Sum II 40. Combination Sum II 40. Combination Sum II
+class Solution {
+public:
+    void solve(int index,vector<int> &arr,int target,vector<vector<int>> &ans,vector<int> &temp)
+    {
+        //base case
+        
+           if(target ==0)
+            {
+                ans.push_back(temp);
+                return;
+            }
+       
+        for(int i=index;i<arr.size();i++)
+        {
+            if(arr[i]>target)
+               break;
+            if(i>index && arr[i]==arr[i-1])
+              continue;
+            temp.push_back(arr[i]);
+            solve(i+1,arr,target-arr[i],ans,temp);
+            //backtrack
+            temp.pop_back();
+        }
+       
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) 
+    {
+        //imp***
+        //Each number in candidates may only be used once in the combination.
+        sort(candidates.begin(),candidates.end());
+        vector<vector<int>> ans;
+        set<vector<int>> st;
+        vector<int> temp;
+        solve(0,candidates,target,ans,temp);
+        return ans;
+    }
+};
