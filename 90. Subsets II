@@ -1,0 +1,31 @@
+90. Subsets II
+lass Solution {
+public:
+     void solve(int index,vector<int>& nums,vector<int> arr,set<vector<int>> &st)
+    {
+        if(index==nums.size())
+        {
+           st.insert(arr);
+           return;
+        }
+
+        solve(index+1,nums,arr,st);
+        arr.push_back(nums[index]);
+        solve(index+1,nums,arr,st);
+          
+        
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) 
+    {
+        vector<int> arr;
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>  ans;
+        set<vector<int>> st;
+        solve(0,nums,arr,st);
+        for(auto x:st)
+        {
+            ans.push_back(x);
+        }
+        return ans;   
+    }
+};
