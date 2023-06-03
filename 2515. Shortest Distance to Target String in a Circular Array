@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int closetTarget(vector<string>& words, string target, int startIndex) 
+    {
+        int mini = INT_MAX;
+        int n = words.size();
+        int index = startIndex;
+        for(int i=0;i<n; ++i ) 
+        {
+            if(target==words[i])
+            {
+                int res= abs(i-startIndex);
+                
+               mini=min({mini,res,n-res});
+            }
+        }
+     
+        if(mini==INT_MAX)
+        {
+            return -1;
+        }
+        return mini;
+    }
+};
