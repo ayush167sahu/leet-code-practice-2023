@@ -1,0 +1,19 @@
+class Solution {
+public:
+    char slowestKey(vector<int>& rel, string keys) 
+    {
+        int n = keys.size();
+        vector<pair<int,char>> v;
+
+        v.push_back({rel[0],keys[0]});
+
+        for(int i=1;i<n;i++)
+        {
+            v.push_back({rel[i]-rel[i-1],keys[i]});
+        }
+        sort(v.begin(),v.end());
+        reverse(v.begin(),v.end());
+
+        return v[0].second;
+    }
+};
