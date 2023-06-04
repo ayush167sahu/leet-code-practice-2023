@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool kLengthApart(vector<int>& nums, int k) 
+    {
+        vector<int> idx;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]==1)
+            {
+                 idx.push_back(i+1);
+            }
+        }
+        for(int i=0;i<idx.size();i++)
+        {
+            cout<<idx[i];
+        }
+        int flag = 0;
+        if(idx.size()>1)
+        {
+        for(int i=1;i<idx.size();i++)
+        {
+            
+              if((idx[i]-idx[i-1]-1)>=k)
+              {
+                  flag =1;
+              }
+              else
+              {
+                  flag =0;
+              }
+        }
+        }
+        else
+        {
+            return true;
+        }
+        if(flag==1)
+        {
+            return true;
+        }
+        return false;
+    }
+};
