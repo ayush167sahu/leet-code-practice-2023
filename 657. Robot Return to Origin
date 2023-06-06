@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool judgeCircle(string moves) 
+    {
+        int n=moves.size();
+        unordered_map<char,int> mp;
+        mp['U']=0;
+        mp['R']=0;
+        mp['L']=0;
+        mp['D']=0;
+        for(int i=0;i<n;i++)
+            {
+                    if(moves[i]=='U')
+                    {
+                        mp['U']++;
+                    }
+                    if(moves[i]=='R')
+                    {
+                        mp['R']++;
+                    }
+                    if(moves[i]=='L')
+                    {
+                        mp['L']++;
+                    }
+                    if(moves[i]=='D')
+                    {
+                        mp['D']++;
+                    }
+            }
+    
+      
+        if(mp['L']==mp['R'] && mp['D']==mp['U'])
+        {
+            return true;
+        }
+        return false;
+ }
+};
