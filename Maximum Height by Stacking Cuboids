@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool check(vector<int>a,vector<int>b)
+    {
+        if(a[0]<=b[0] && a[1]<=b[1] && a[2]<=b[2])
+        {
+            return true;
+        }
+        else
+        return false;
+    }
+    int solve(vector<vector<int>>& cuboids,int cur,int prev,int n,vector<vector<int>>&dp)
+    {
+        if(cur==n)
+        {
+            return 0;
+        }
+        int pick=0;
+        if(dp[prev+1][cur]!=-1)
+        {
+            return dp[prev+1][cur];
+        }
+        if(prev==-1 || check(cuboids[cur],cuboids[prev]) )
+        {
+            pick = cuboids[cur][2]+solve(cuboids,cur+1,cur,n,dp);
+        }
+        int  nopick=0+solve(cuboids,cur+1,prev,n,dp);
+  
+        dp[prev+1][cur] =max(pick,nopick);
+        return dp[prev+1][cur];
+    }
+    int maxHeight(vector<vector<int>>& cuboids) 
+    {
+        int n = cuboids.size();
+        for(int i=0;i<cuboids.size();i++)
+        {
+            sort(cuboids[i].begin(),cuboids[i].end());
+        }
+        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        sort(cuboids.rbegin(),cuboids.rend());
+        return solve(cuboids,0,-1,cuboids.size(),dp);
+    }
+};
