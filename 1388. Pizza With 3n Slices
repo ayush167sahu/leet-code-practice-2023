@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int solve(vector<int>& slices,int s,int e,int n,vector<vector<int>>&dp)
+    {
+        //base case
+        //as a person cam get max of n/3
+
+        if(n==0 || s>e)
+        {
+            return 0;
+        }
+        if(dp[s][n]!=-1)
+        {
+            return dp[s][n];
+        }
+        int incl = slices[s]+solve(slices,s+2,e,n-1,dp);
+        int excl = 0        +solve(slices,s+1,e,n,dp);
+
+        return dp[s][n]=max(incl,excl);
+    }
+    int maxSizeSlices(vector<int>& slices)
+    {
+        int n = slices.size();
+        //when the first element is included then the last element should be not taken
+        vector<vector<int>> dp1(n+1,vector<int>(n+1,-1));
+        vector<vector<int>> dp2(n+1,vector<int>(n+1,-1));
+        int op1 = solve(slices,0,n-2,n/3,dp1);
+        int op2 = solve(slices,1,n-1,n/3,dp2);
+
+        return max(op1,op2);
+    }
+};
