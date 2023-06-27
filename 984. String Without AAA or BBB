@@ -1,0 +1,44 @@
+string strWithout3a3b(int a, int b) 
+    {
+        
+        string ans="";
+        while(a>=1 && b>=1)
+        {
+            if(a-b>=1)
+            {
+                ans = ans+"aab";
+              
+                a-=2;
+                b--;
+            }
+            else if(a==b)
+            {
+                ans = ans+"ab";
+                a--;
+                b--;
+            }
+            else
+            {
+                ans = ans+"bba";
+                b-=2;
+                a--;
+            }
+        }
+        if(a==2 && b==0)
+        {
+            ans = ans+"aa";
+        }
+        else if(a==1 && b==0)
+        {
+            ans  = ans+"a";
+        }
+        else if(b==2 && a==0)
+        {
+            ans  = ans+"bb";
+        }
+        else if(b==1 && a==0)
+        {
+            ans  = ans+"b";
+        }
+       return ans;
+    }
