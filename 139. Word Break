@@ -1,0 +1,33 @@
+bool solve(int idx,int n,string s,unordered_set<string>&st,vector<int>&dp)
+    {
+        if(idx==n)
+        {
+            return true;
+        }
+        if(dp[idx]!=-1)
+        {
+            return dp[idx];
+        }
+        string temp;
+        for(int j=idx;j<s.size();j++)
+        {
+            temp+=s[j];
+            if(st.find(temp)!=st.end() && solve(j+1,n,s,st,dp))
+            {
+                return dp[idx] = true;
+            }
+        }
+        return dp[idx] = false;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) 
+    {
+        int n=s.size();
+        unordered_set<string> st;
+        for(auto a:wordDict)
+        {
+            st.insert(a);
+        }
+        vector<int> dp(n+1,-1);
+        return solve(0,n,s,st,dp);
+
+    }
