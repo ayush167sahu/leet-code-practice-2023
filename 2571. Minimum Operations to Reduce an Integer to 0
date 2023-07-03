@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int minOperations(int n) 
+    {
+        if(n==0)
+        {
+            return 0;
+        }
+        int i = log2(n);
+        long long low  = pow(2,i);
+        long long high = low*2;
+        int diff1 = n - low;
+        int diff2 = high-n;
+        if(diff1<diff2)
+        {
+           return 1+minOperations(diff1);
+        }
+        else
+        {
+            return 1+minOperations(diff2);
+        }
+     }
+};
